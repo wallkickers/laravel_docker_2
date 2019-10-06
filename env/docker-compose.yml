@@ -1,0 +1,27 @@
+version: '3'
+services:
+  web:
+    build: ./docker/web
+    ports:
+      - "10080:80"
+    environment:
+      TZ: "Asia/Tokyo"
+      LANG: "ja_JP.utf8"
+      LC_ALL: "ja_JP.utf8"
+    volumes:
+      - ../web:/var/www/html
+    working_dir: /var/www/html
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: sample
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "13306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+volumes:
+  mysql-data:
+
